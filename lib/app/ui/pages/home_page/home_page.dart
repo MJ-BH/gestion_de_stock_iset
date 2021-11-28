@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gestion_de_stock/app/ui/componnents/simple_dialog.dart';
-import 'package:gestion_de_stock/app/ui/pages/ajout_famille/ajout_famille.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {

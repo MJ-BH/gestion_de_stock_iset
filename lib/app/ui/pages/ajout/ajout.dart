@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gestion_de_stock/app/controllers/famille_controller.dart';
 import 'package:get/get.dart';
+
+import 'ajout_famille.dart';
 
 class Ajout extends StatelessWidget {
   Ajout({Key? key}) : super(key: key);
@@ -7,17 +10,40 @@ class Ajout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(arg.toString());
     return Scaffold(
         appBar: AppBar(title: Text("Ajout " + arg.toString())),
         body: navigate());
   }
 
   Widget navigate() {
+    TextEditingController nameControll = TextEditingController();
+
     switch (arg.toString()) {
       case 'Famille':
         {
-          return AjoutFamille();
+          return Column(
+            children: [
+              GetX<FamilleController>(
+                initState: (_) {},
+                builder: (_) {
+                  return TextFormField(
+                    autofocus: true,
+                    controller: nameControll,
+                    decoration: const InputDecoration(
+                      labelText: "Name",
+                    ),
+                    onChanged: (value) {},
+                  );
+                },
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Get.find<FamilleController>().name(nameControll.text);
+                    Get.find<FamilleController>().savetoBox();
+                  },
+                  child: Text("Ajouter "))
+            ],
+          );
         }
       case 'composant':
         {
@@ -29,23 +55,9 @@ class Ajout extends StatelessWidget {
         }
       default:
         {
-          return AjoutPersonne();
+          return AjoutFamilleView();
         }
     }
-  }
-}
-
-class AjoutFamille extends StatefulWidget {
-  AjoutFamille({Key? key}) : super(key: key);
-
-  @override
-  _AjoutFamilleState createState() => _AjoutFamilleState();
-}
-
-class _AjoutFamilleState extends State<AjoutFamille> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
 
